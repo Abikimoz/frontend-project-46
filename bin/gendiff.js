@@ -1,5 +1,6 @@
 import { Command } from 'commander';
 import showDiff from '../src/index.js';
+
 const program = new Command();
 
 program

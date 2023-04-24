@@ -5,8 +5,8 @@ import { cwd } from 'node:process';
 import _ from 'lodash';
 
 export default function showDiff(filepath1, filepath2) {
-  console.log(resolvePath(filepath1));
-  console.log(resolvePath(filepath2));
+  // console.log(resolvePath(filepath1));
+  // console.log(resolvePath(filepath2));
 
   const data1 = readFileSync(resolvePath(filepath1), { encoding: 'utf8' });
   const data2 = readFileSync(resolvePath(filepath2), { encoding: 'utf8' });
@@ -17,7 +17,7 @@ export default function showDiff(filepath1, filepath2) {
   // console.log(path.resolve());
   // console.log(process.cwd());
 
-  generateDiff(parseData1, parseData2);
+  return generateDiff(parseData1, parseData2);
 
 //   console.log(parseData1, parseData2);
 }
@@ -40,7 +40,7 @@ function generateDiff(obj1, obj2) {
     if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) {
       result.push(`  - ${key}: ${obj1[key]}`);
     } else if (!Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
-      result.push(`  - ${key}: ${obj2[key]}`);
+      result.push(`  + ${key}: ${obj2[key]}`);
     } else if (Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
       if (obj1[key] === obj2[key]) {
         result.push(`    ${key}: ${obj2[key]}`);
@@ -51,6 +51,6 @@ function generateDiff(obj1, obj2) {
     }
   }
   result.push('}');
-  // console.log(result.join('\n'));
+  console.log(result.join('\n'));
   return result.join('\n');
 }
