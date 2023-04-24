@@ -1,32 +1,8 @@
-import { log } from 'node:console';
+// import { log } from 'node:console';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
-import { cwd } from 'node:process';
+// import { cwd } from 'node:process';
 import _ from 'lodash';
-
-export default function showDiff(filepath1, filepath2) {
-  // console.log(resolvePath(filepath1));
-  // console.log(resolvePath(filepath2));
-
-  const data1 = readFileSync(resolvePath(filepath1), { encoding: 'utf8' });
-  const data2 = readFileSync(resolvePath(filepath2), { encoding: 'utf8' });
-
-  const parseData1 = JSON.parse(data1);
-  const parseData2 = JSON.parse(data2);
-
-  // console.log(path.resolve());
-  // console.log(process.cwd());
-
-  return generateDiff(parseData1, parseData2);
-
-//   console.log(parseData1, parseData2);
-}
-
-function resolvePath(filepath) {
-  return filepath.includes('fixtures')
-    ? filepath
-    : `${path.resolve()}/__fixtures__/${filepath}`;
-}
 
 function generateDiff(obj1, obj2) {
   const keys1 = Object.keys(obj1);
@@ -51,6 +27,30 @@ function generateDiff(obj1, obj2) {
     }
   }
   result.push('}');
-  console.log(result.join('\n'));
+  // console.log(result.join('\n'));
   return result.join('\n');
+}
+
+function resolvePath(filepath) {
+  return filepath.includes('fixtures')
+    ? filepath
+    : `${path.resolve()}/__fixtures__/${filepath}`;
+}
+
+export default function showDiff(filepath1, filepath2) {
+  // console.log(resolvePath(filepath1));
+  // console.log(resolvePath(filepath2));
+
+  const data1 = readFileSync(resolvePath(filepath1), { encoding: 'utf8' });
+  const data2 = readFileSync(resolvePath(filepath2), { encoding: 'utf8' });
+
+  const parseData1 = JSON.parse(data1);
+  const parseData2 = JSON.parse(data2);
+
+  // console.log(path.resolve());
+  // console.log(process.cwd());
+
+  return generateDiff(parseData1, parseData2);
+
+//   console.log(parseData1, parseData2);
 }
