@@ -11,6 +11,9 @@ program
   .version('0.0.1')
   .helpOption('-h, --help', 'output usage information')
   .option('-f, --format <type>', 'output format')
-  .action(showDiff);
+  .action((filepath1, filepath2) => {
+    const result = showDiff(filepath1, filepath2);
+    console.log(result);
+  });
 
 program.parse();
