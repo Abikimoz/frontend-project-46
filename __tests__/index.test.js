@@ -1,4 +1,4 @@
-import { test, expect } from '@jest/globals';
+// import { test, expect } from '@jest/globals';
 import result from '../__fixtures__/result.js';
 import showDiff from '../src/index.js';
 
