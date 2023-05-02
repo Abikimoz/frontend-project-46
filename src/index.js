@@ -9,6 +9,8 @@ function generateDiff(obj1, obj2) {
   const allKeys = _.union(keys1, keys2);
   const sortedKeys = allKeys.sort();
 
+  // formatter(ast, format)
+
   const result = ['{'];
   for (let key of sortedKeys) {
     if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) {
