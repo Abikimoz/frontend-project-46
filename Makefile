@@ -8,7 +8,7 @@ run2:
 	node bin/gendiff.js file1.json file2.json
 
 run3:
-	node bin/gendiff.js stylish ./__fixtures__/filePlan1.json ./__fixtures__/filePlan2.json
+	node bin/gendiff.js ./__fixtures__/filePlan1.json ./__fixtures__/filePlan2.json
 
 test:
 	npm test

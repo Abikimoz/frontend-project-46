@@ -1,36 +1,52 @@
 import _ from 'lodash';
 
-export default function buildAST(obj1, obj2) {
-  const keys1 = Object.keys(obj1);
-  const keys2 = Object.keys(obj2);
+const buildAST = (data1, data2) => {
+  const data1Keys = _.keys(data1);
+  const data2Keys = _.keys(data2);
+  const sortedKeys = _.sortBy(_.union(data1Keys, data2Keys));
 
-  const allKeys = _.union(keys1, keys2);
-  const sortedKeys = allKeys.sort();
-
-  const tree = sortedKeys.map((key) => {
-    if (!_.has(obj1, key) && _.has(obj2, key)) {
+  const children = sortedKeys.map((key) => {
+    if (!_.has(data1, key)) {
       return {
         type: 'added',
         key,
-        value: obj2[key],
+        value: data2[key],
       };
-    } if (_.has(obj1, key) && _.has(obj2, key)) {
-      if (obj1[key] === obj2[key]) {
-        return {
-          type: 'unchanged',
-          key,
-          value: obj1[key],
-        };
-      } return {
-        type: 'changed',
+    }
+    if (!_.has(data2, key)) {
+      return {
+        type: 'removed',
         key,
-        value: [obj1[key], obj2[key]],
+        value: data1[key],
       };
-    } return {
-      type: 'deleted',
+    }
+    if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
+      return {
+        type: 'nested',
+        key,
+        children: buildAST(data1[key], data2[key]),
+      };
+    }
+    if (_.isEqual(data1[key], data2[key])) {
+      return {
+        type: 'unchanged',
+        key,
+        value: data1[key],
+      };
+    }
+    return {
+      type: 'changed',
       key,
-      value: obj1[key],
+      value: data1[key],
+      value2: data2[key],
     };
   });
-  return tree;
-}
+  return children;
+};
+
+const getDifferenceTree = (data1, data2) => ({
+  type: 'root',
+  children: buildAST(data1, data2),
+});
+
+export default getDifferenceTree;

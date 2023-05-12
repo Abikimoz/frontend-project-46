@@ -1,5 +1,11 @@
 {
-    "timeout": 20,
-    "verbose": true,
-    "host": "hexlet.io"
+  "setting22": "Value 1",
+  "setting2": 200,
+  "setting33": true,
+  "setting6": {
+    "doge": {
+      "wow": "",
+      "bam": 11
+    }
   }
+}
