@@ -10,6 +10,9 @@ run2:
 run3:
 	node bin/gendiff.js ./__fixtures__/filePlan1.json ./__fixtures__/filePlan2.json
 
+run4:
+	node bin/gendiff.js --format plain file1.json file2.json
+
 test:
 	npm test
 
