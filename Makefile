@@ -13,6 +13,9 @@ run3:
 run4:
 	node bin/gendiff.js --format plain file1.json file2.json
 
+run7:
+	node bin/gendiff.js --format json file1.json file2.json
+
 test:
 	npm test
 

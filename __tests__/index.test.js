@@ -4,18 +4,6 @@ import resultPlain from '../__fixtures__/resultPlain.js';
 import resultJSON from '../__fixtures__/resultJSON.js';
 import showDiff from '../src/index.js';
 
-// test('json', () => {
-//   expect(showDiff('file1.json', 'file2.json')).toBe(result);
-// });
-
-// test('yaml', () => {
-//   expect(showDiff('file1.yaml', 'file2.yaml')).toBe(result);
-// });
-
-// test('yml', () => {
-//   expect(showDiff('file1.yml', 'file2.yml')).toBe(result);
-// });
-
 describe('stylish', () => {
   test('json', () => {
     expect(showDiff('./__fixtures__/file1.json', './__fixtures__/file2.json')).toBe(resultStylish);
