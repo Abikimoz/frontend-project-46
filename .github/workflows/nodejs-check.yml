@@ -6,8 +6,8 @@ on:
   - push
   - pull_request
 
-env:
-  CI: true
+# env:
+#   CI: true
 
 jobs:
   build:
@@ -42,7 +42,7 @@ jobs:
         uses: paambaati/codeclimate-action@v3.0.0
         # Add Code Climate secret key
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.f9a147297920a2c5258c6e21b432e225fc79712bbd5c289361ea8010452aa8b2 }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: make test-coverage
           debug: true
